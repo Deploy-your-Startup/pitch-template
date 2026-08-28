@@ -14,6 +14,8 @@ Live: https://§§deploy_your_startup.base_domain§§
 │   ├── public/
 │   ├── astro.config.mjs
 │   └── package.json
+├── make.sh                   # run / build entrypoint
+├── mise.toml                 # node version + tasks delegating to make.sh
 └── .github/workflows/        # CI/CD
     └── deploy.yml            # build + push to Cloudflare Pages
 ```
@@ -24,10 +26,8 @@ new modules (e.g. `backend/`, `ai/`) drop in as siblings without restructuring.
 ## Development
 
 ```bash
-cd frontend
-npm install
-npm run dev      # http://localhost:4321
-npm run build    # static output in frontend/dist/
+./make.sh run    # http://localhost:4321
+./make.sh build  # static output in frontend/dist/
 ```
 
 ## Deployment
