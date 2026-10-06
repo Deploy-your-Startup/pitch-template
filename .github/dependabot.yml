@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: /frontend
+    directory: /template/frontend
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
@@ -10,23 +10,12 @@ updates:
         patterns:
           - "astro"
           - "@astrojs/*"
-      dev-dependencies:
-        dependency-type: development
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
     groups:
       actions:
         patterns:
           - "*"
-    ignore:
-      # deploy.yml calls the reusable workflow from the *per-user* copy of
-      # deploy-your-startup, which is private. Dependabot has no credentials
-      # for it, so every single run ends in git_dependencies_not_reachable and
-      # the repository shows a red weekly job forever. It is our own workflow,
-      # versioned by `startup sync` and pinned to @main, so there is nothing
-      # for Dependabot to bump here anyway.
-      - dependency-name: "*/deploy-your-startup/*"
