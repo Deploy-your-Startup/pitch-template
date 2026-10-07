@@ -1,47 +1,13 @@
-# §§deploy_your_startup.project_name§§
+# Deploy your Startup — Pitch template
 
-A lightweight landing page built with [Astro](https://astro.build), deployed to
-[Cloudflare Pages](https://pages.cloudflare.com) via GitHub Actions on push to `main`.
-
-Live: https://§§deploy_your_startup.base_domain§§
-
-## Layout
-
-```
-.
-├── frontend/                 # Astro site (the only module today)
-│   ├── src/
-│   ├── public/
-│   ├── astro.config.mjs
-│   └── package.json
-├── make.sh                   # run / build entrypoint
-├── mise.toml                 # node version + tasks delegating to make.sh
-└── .github/workflows/        # CI/CD
-    └── deploy.yml            # build + push to Cloudflare Pages
-```
-
-The `frontend/` folder follows the modulith pattern used across our projects —
-new modules (e.g. `backend/`, `ai/`) drop in as siblings without restructuring.
-
-## Development
+A versioned Copier template for a static Astro landing page deployed to
+Cloudflare Pages, maintained through startup CLI. The generated project lives
+under `template/`; instructions for maintainers are in [TEMPLATE.md](TEMPLATE.md).
 
 ```bash
-./make.sh run    # http://localhost:4321
-./make.sh build  # static output in frontend/dist/
+startup bootstrap --kind pitch --template-version <tag-or-commit>
 ```
 
-## Deployment
-
-Every push to `main` that touches `frontend/**` triggers
-`.github/workflows/deploy.yml`. The workflow requires two repository secrets:
-
-- `CLOUDFLARE_API_TOKEN` — scoped token with `Cloudflare Pages: Edit` and `Account: Read`
-- `CLOUDFLARE_ACCOUNT_ID` — your Cloudflare account ID (`wrangler whoami` shows it)
-
-Both are set automatically by `startup bootstrap` in pitch mode.
-
-## Custom Domain
-
-Configure §§deploy_your_startup.base_domain§§ as a custom domain in the
-Cloudflare Pages project settings — Cloudflare provisions the certificate
-automatically.
+This repository is not an application checkout. Generate a test project before
+running its tasks. CI generates the project, fails on unresolved placeholders
+and builds the site.

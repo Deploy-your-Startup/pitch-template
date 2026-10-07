@@ -1,0 +1,30 @@
+_min_copier_version: '9.18.2'
+_subdirectory: template
+# Render the existing placeholder syntax. Astro expressions and GitHub
+# expressions retain their own delimiters verbatim.
+_templates_suffix: ''
+_envops:
+  variable_start_string: '§§deploy_your_startup.'
+  variable_end_string: '§§'
+  block_start_string: '§§%'
+  block_end_string: '%§§'
+  comment_start_string: '§§#'
+  comment_end_string: '#§§'
+  keep_trailing_newline: true
+_exclude:
+  - .git
+  - copier.yml
+  - TEMPLATE.md
+  - .github/workflows/template-check.yml
+  - '**/node_modules'
+  - '**/dist'
+  - '**/.astro'
+project_name:
+  type: str
+  help: Repository and Cloudflare Pages project name (kebab-case)
+base_domain:
+  type: str
+  help: Domain served by Cloudflare Pages
+github_username:
+  type: str
+  help: GitHub user or organisation
