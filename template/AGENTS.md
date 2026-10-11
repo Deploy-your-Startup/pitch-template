@@ -17,6 +17,17 @@ Cloudflare credentials stay in repository secrets set by `startup bootstrap`.
 Never print, commit or hard-code them, and do not deploy manually unless the
 user asks for it.
 
+## Testing
+
+**Integration and E2E tests only. Never write unit tests.** Every behaviour
+change includes an integration test of the real Astro build; changed visitor
+flows also get browser E2E (ADR 0003).
+
+Use explicit **GIVEN / WHEN / THEN**: arrange the relevant state, perform one
+business action and assert what the visitor observes. Keep scenarios independent.
+Find controls by role and visible label. Do not mock our own code; use local
+stand-ins for external services and never submit test data to live providers.
+
 ## Working conventions
 
 - KEEP IT SIMPLE: a landing page needs no framework beyond Astro. Avoid
@@ -26,10 +37,8 @@ user asks for it.
   [`.github/git-commit-instructions.md`](.github/git-commit-instructions.md).
 - **Pull request titles and descriptions are always in English**, even when the
   conversation was in another language.
-- Tests: integration and E2E tests only, never unit tests, and no mocks; an
-  external service gets a small local stand-in service. Structure every test as
-  GIVEN / WHEN / THEN and find elements by role and visible label.
-- Before finishing, run `./make.sh build`.
+- Before finishing, run `./make.sh build` and the affected integration tests;
+  run browser E2E for changed visitor flows.
 
 ## Code style
 
@@ -50,6 +59,7 @@ Record decisions that shape the project as numbered ADRs in
 
 - [ADR 0001](docs/architecture/0001-documentation-at-interfaces.md) — load when adding comments, documentation or an ADR.
 - [ADR 0002](docs/architecture/0002-static-landing-page.md) — load for hosting, framework or backend choices.
+- [ADR 0003](docs/architecture/0003-test-strategy.md) — load when writing integration or browser E2E scenarios; includes GIVEN / WHEN / THEN.
 
 ## Template updates (Copier)
 
