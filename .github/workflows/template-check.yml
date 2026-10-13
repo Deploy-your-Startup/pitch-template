@@ -45,3 +45,10 @@ jobs:
         run: |
           grep -q '<title>template-check — Coming Soon</title>' index.html
           grep -q 'example.com' index.html
+
+  container-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: bash tests/container_e2e_test.sh

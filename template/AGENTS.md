@@ -19,6 +19,11 @@ user asks for it.
 
 ## Testing
 
+The shared container E2E workflow gates Cloudflare deployment. Browser tooling
+lives in `e2e_tests/Dockerfile`; each shard tests the real Astro production build.
+The small default suite uses one shard; increase the caller’s `shards` as it grows.
+PRs run checks without deploying. Reports are collected before Compose cleanup.
+
 **Integration and E2E tests only. Never write unit tests.** Every behaviour
 change includes an integration test of the real Astro build; changed visitor
 flows also get browser E2E (ADR 0003).

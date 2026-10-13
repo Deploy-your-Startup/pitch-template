@@ -1,10 +1,14 @@
 name: Deploy
 
 on:
+  pull_request:
+    paths: ["frontend/**", "e2e_tests/**", ".dockerignore", ".github/workflows/deploy.yml"]
   push:
     branches: [main]
     paths:
       - "frontend/**"
+      - "e2e_tests/**"
+      - ".dockerignore"
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
@@ -13,7 +17,13 @@ permissions:
   deployments: write
 
 jobs:
+  browser:
+    uses: §§deploy_your_startup.github_username§§/deploy-your-startup/.github/workflows/container-e2e.yml@main
+    with:
+      shards: 1
   deploy:
+    needs: browser
+    if: github.event_name != 'pull_request'
     uses: §§deploy_your_startup.github_username§§/deploy-your-startup/.github/workflows/deploy-pages.yml@main
     with:
       project_name: §§deploy_your_startup.project_name§§
