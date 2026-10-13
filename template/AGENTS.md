@@ -79,3 +79,12 @@ startup template update --version main
 
 Review the diff, resolve conflicts, run `./make.sh build`, then commit
 including `.copier-answers.yml`. Do not edit Copier answers manually.
+
+## Test coverage and completion claims
+
+Follow [Testing policy and completion evidence](docs/testing-policy.md).
+Keep integration tests as the default and E2E coverage for changed user flows.
+A green pipeline confirms the executed checks; smoke tests and skipped provider
+checks do not establish full feature coverage. Record uncovered flows and report
+remaining gaps when completing work. Never remove required E2E scenarios to
+improve deployment speed.
