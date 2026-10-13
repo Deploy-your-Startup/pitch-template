@@ -9,13 +9,14 @@ follow the right links or can use a form. Tests should describe those outcomes.
 
 ## Decision
 
-**Integration and E2E tests only. Never write unit tests.** Every behaviour
+**Integration tests are the default; changed user flows require E2E tests.**
+Unit tests are reserved for complex algorithms and supplement these tests.
+Every behaviour
 change includes an integration test; changed user flows also include browser E2E.
 A bug fix starts with a scenario that reproduces the bug.
 
 Integration tests build the real Astro site and inspect the generated pages.
-Browser E2E serves that build and drives the real page. Do not test isolated
-helpers or mock our own components. For an external form or API provider, use
+Browser E2E serves that build and drives the real page. Do not use isolated tests for routine helpers or mock our own components. For an external form or API provider, use
 a local stand-in over the real protocol; replace only an external boundary
 that cannot run locally and document why.
 
@@ -30,6 +31,19 @@ are separate scenarios; related scenarios may share one focused spec file.
 Find browser controls by role and visible label, using data-testid only when
 there is no suitable semantic locator. Never send test sign-ups to a live provider.
 
+### Limited algorithm exception
+
+Use focused unit tests only for complex algorithms with meaningful edge cases
+or invariants, such as pathfinding, ranking or non-trivial parsing. Explain in
+the test or change description what makes the algorithm complex and which
+cases need isolated coverage. Exercise the real algorithm without mocking our
+own code. Routine helpers, views, models and service workflows stay covered
+through integration tests.
+
+Algorithm unit tests supplement integration and E2E tests; they never replace
+the required application or user-flow scenarios. Do not add unit tests merely
+to increase a coverage percentage. Use GIVEN / WHEN / THEN for them too.
+
 ## Consequences
 
 - Tests check the built artifact and the actual visitor flow.
@@ -39,5 +53,6 @@ there is no suitable semantic locator. Never send test sign-ups to a live provid
 ## Alternatives considered
 
 - **Build only:** catches compilation errors, not broken interactions.
-- **Unit tests or mocked components:** omit the deployed page and integration.
+- **Unit tests as the default:** omit the deployed page and integration.
+- **Mocked components:** hide the behaviour of the real page.
 - **Live provider accounts:** introduce network dependence and real side effects.

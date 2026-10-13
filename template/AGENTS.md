@@ -24,7 +24,9 @@ lives in `e2e_tests/Dockerfile`; each shard tests the real Astro production buil
 The small default suite uses one shard; increase the caller’s `shards` as it grows.
 PRs run checks without deploying. Reports are collected before Compose cleanup.
 
-**Integration and E2E tests only. Never write unit tests.** Every behaviour
+**Integration tests are the default; changed user flows require E2E tests.**
+Unit tests are reserved for complex algorithms and supplement these tests.
+Every behaviour
 change includes an integration test of the real Astro build; changed visitor
 flows also get browser E2E (ADR 0003).
 
