@@ -12,8 +12,8 @@ jobs:
   generated-project:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
       - name: Test standalone agent instructions and core ADRs
         run: bash tests/agent_instructions_test.sh
       - name: Render the project
@@ -34,7 +34,7 @@ jobs:
           for adr in $adrs; do test -f "$adr" || { echo "missing $adr"; exit 1; }; done
       - name: Reject unresolved placeholders
         run: "! grep -rn '§§' ../generated"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
       - name: Build the generated site
@@ -49,6 +49,6 @@ jobs:
   container-e2e:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
       - run: bash tests/container_e2e_test.sh
