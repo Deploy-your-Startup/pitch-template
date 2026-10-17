@@ -7,12 +7,8 @@ Users retain ownership of their code, accounts, servers and credentials.
 
 ## Tests and runtime
 
-Every behavior change ships with integration tests; changed user flows require
-E2E tests. Unit tests are reserved for complex algorithms and supplement
-integration and E2E coverage. Exercise
-real scripts, Git repositories, Copier renders or Ansible loading and assert
-what the user sees. Replace only external boundaries that cannot run locally.
-Use GIVEN / WHEN / THEN. Run the generated-project workflow and a real Copier render/build.
+Follow [Testing policy and completion evidence](docs/testing-policy.md). Run the
+generated-project workflow and a real Copier render and build.
 Use global uv with the committed .python-version and run project commands
 through mise. Formatting may write; lint must only check. Do not add git hooks.
 
@@ -37,12 +33,3 @@ preview changes with --dry-run. Ask before destructive or costly operations.
 Keep application template updates (startup template update) separate from
 shared deployment updates (startup sync). Preserve application customizations
 and deployment/group_vars. Never hand-edit deployment/.shared-roles.
-
-## Test coverage and completion claims
-
-Follow [Testing policy and completion evidence](docs/testing-policy.md).
-Keep integration tests as the default and E2E coverage for changed user flows.
-A green pipeline confirms the executed checks; smoke tests and skipped provider
-checks do not establish full feature coverage. Record uncovered flows and report
-remaining gaps when completing work. Never remove required E2E scenarios to
-improve deployment speed.
