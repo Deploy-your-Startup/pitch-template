@@ -35,6 +35,9 @@ jobs:
           adrs=$(grep -o 'docs/architecture/[^)]*\.md' AGENTS.md)
           test -n "$adrs"
           for adr in $adrs; do test -f "$adr" || { echo "missing $adr"; exit 1; }; done
+      - name: Check that public repositories deploy through the production environment
+        working-directory: ../generated
+        run: grep -qF "repository.visibility == 'public' && 'production'" .github/workflows/deploy.yml
       - name: Reject unresolved placeholders
         run: "! grep -rn '§§' ../generated"
       - uses: actions/setup-node@v7
