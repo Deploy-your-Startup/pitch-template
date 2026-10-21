@@ -35,6 +35,9 @@ jobs:
           adrs=$(grep -o 'docs/architecture/[^)]*\.md' AGENTS.md)
           test -n "$adrs"
           for adr in $adrs; do test -f "$adr" || { echo "missing $adr"; exit 1; }; done
+      - name: Check that deploys use the main-only production environment
+        working-directory: ../generated
+        run: grep -qx '      environment: production' .github/workflows/deploy.yml
       - name: Reject unresolved placeholders
         run: "! grep -rn '§§' ../generated"
       - uses: actions/setup-node@v7

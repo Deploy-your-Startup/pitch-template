@@ -27,6 +27,7 @@ jobs:
     uses: §§deploy_your_startup.github_username§§/deploy-your-startup/.github/workflows/deploy-pages.yml@main
     with:
       project_name: §§deploy_your_startup.project_name§§
+      environment: production
     secrets:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

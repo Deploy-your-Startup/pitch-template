@@ -7,8 +7,8 @@ execute shell commands.
 
 The template asks for three public parameters only: `project_name`,
 `base_domain` and `github_username`. Cloudflare credentials are stored by
-startup CLI as repository secrets of the generated project and never appear in
-Copier answers.
+startup CLI as secrets of the generated project's `production` environment,
+which only `main` can deploy to, and never appear in Copier answers.
 
 The generated `deploy.yml` calls the `deploy-pages.yml` reusable workflow from
 the owner's `deploy-your-startup` repository, which `startup sync` maintains.
