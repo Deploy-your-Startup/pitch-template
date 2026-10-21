@@ -11,8 +11,11 @@ updates:
           - "astro"
           - "@astrojs/*"
 
+  # Actions are pinned to commit SHAs; Dependabot keeps the SHAs and their tag comments current.
   - package-ecosystem: github-actions
-    directory: /
+    directories:
+      - /
+      - /template
     schedule:
       interval: weekly
     groups:
