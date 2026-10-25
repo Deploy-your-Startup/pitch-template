@@ -46,6 +46,9 @@ controls by role and visible label, and never submit test data to live providers
 - Before completing code changes, run the build, lint and all tests locally:
   integration, existing unit and browser E2E. Record failures and skips.
 
+Read `run_e2e` in `.github/workflows/`: `false` means local E2E only,
+`true` also runs it in CI. Dependabot PRs always run E2E in CI.
+
 ## Architecture decisions
 
 Load an ADR when its topic comes up. Numbers 0001-0099 belong to the template
