@@ -1,24 +1,22 @@
 version: 2
 updates:
   - package-ecosystem: npm
+    open-pull-requests-limit: 2
     directory: /template/frontend
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
     groups:
-      astro:
-        patterns:
-          - "astro"
-          - "@astrojs/*"
-
-  # Actions are pinned to commit SHAs; Dependabot keeps the SHAs and their tag comments current.
+      routine-updates:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
   - package-ecosystem: github-actions
+    open-pull-requests-limit: 2
     directories:
       - /
       - /template
     schedule:
       interval: weekly
     groups:
-      actions:
-        patterns:
-          - "*"
+      routine-updates:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]

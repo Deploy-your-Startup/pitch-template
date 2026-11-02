@@ -12,6 +12,11 @@ on:
       - ".github/workflows/deploy.yml"
   workflow_dispatch:
 
+# Superseded PR checks can stop; pushes and manual deployments keep independent runs.
+concurrency:
+  group: pr-${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
   deployments: write

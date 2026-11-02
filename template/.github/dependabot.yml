@@ -1,27 +1,23 @@
 version: 2
 updates:
   - package-ecosystem: npm
+    open-pull-requests-limit: 2
     directory: /frontend
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
     groups:
-      astro:
-        patterns:
-          - "astro"
-          - "@astrojs/*"
-      dev-dependencies:
-        dependency-type: development
-
+      routine-updates:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
   - package-ecosystem: github-actions
+    open-pull-requests-limit: 2
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
     groups:
-      actions:
-        patterns:
-          - "*"
+      routine-updates:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
     ignore:
       # deploy.yml calls the reusable workflow from the *per-user* copy of
       # deploy-your-startup, which is private. Dependabot has no credentials

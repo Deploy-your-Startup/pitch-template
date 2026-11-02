@@ -25,6 +25,23 @@ with tempfile.TemporaryDirectory() as temporary:
                     data={"project_name": "instructions-check",
                           "base_domain": "example.com", "github_username": "example"})
 
+    # GIVEN a rendered workflow, WHEN PRs are refreshed, THEN only that PR may cancel.
+    import yaml
+    for workflow_path in (project / ".github/workflows").glob("*.yml"):
+        workflow = yaml.safe_load(workflow_path.read_text())
+        events = workflow.get("on", workflow.get(True, {}))
+        if "pull_request" not in events:
+            continue
+        scheduling = workflow["concurrency"]
+        assert "github.workflow" in scheduling["group"]
+        assert "github.event.pull_request.number" in scheduling["group"]
+        assert "github.run_id" in scheduling["group"], "Deployments must not share a cancellable PR queue"
+        assert scheduling["cancel-in-progress"] == "${{ github.event_name == 'pull_request' }}"
+    for config in (project / ".github").glob("dependabot.y*"):
+        for update in yaml.safe_load(config.read_text())["updates"]:
+            assert update["open-pull-requests-limit"] == 2
+            assert update["groups"]["routine-updates"]["update-types"] == ["minor", "patch"]
+
     instructions = (project / "AGENTS.md").read_text()
     assert instructions.strip(), "AGENTS.md must contain the project instructions"
     assert not (project / "CLAUDE.md").exists(), "Generated projects use AGENTS.md"
