@@ -28,3 +28,11 @@ base_domain:
 github_username:
   type: str
   help: GitHub user or organisation
+deploy_repository:
+  type: str
+  default: Deploy-your-Startup/deploy
+  help: Repository with the shared deployment workflows (Deploy-your-Startup/deploy or a fork)
+deploy_ref:
+  type: str
+  default: 64ec3a5f13de5328f02272cccaa3bcffde768fcf
+  help: Release commit of the shared deployment repository (v1.0.0)
