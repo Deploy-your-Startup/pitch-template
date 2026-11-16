@@ -20,10 +20,8 @@ updates:
         patterns: ["*"]
         update-types: ["minor", "patch"]
     ignore:
-      # deploy.yml calls the reusable workflow from the *per-user* copy of
-      # deploy-your-startup, which is private. Dependabot has no credentials
-      # for it, so every single run ends in git_dependencies_not_reachable and
-      # the repository shows a red weekly job forever. It is our own workflow,
-      # versioned by `startup sync` and pinned to @main, so there is nothing
-      # for Dependabot to bump here anyway.
-      - dependency-name: "*/deploy-your-startup/*"
+      # deploy.yml pins the shared deployment workflows to a release commit
+      # of Deploy-your-Startup/deploy. `startup update` moves that pin together
+      # with the project's other shared references, so Dependabot must not
+      # bump it on its own.
+      - dependency-name: "Deploy-your-Startup/deploy/*"
