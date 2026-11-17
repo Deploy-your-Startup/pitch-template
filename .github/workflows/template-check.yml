@@ -43,11 +43,8 @@ jobs:
       - name: Check that public repositories deploy through the production environment
         working-directory: ../generated
         run: grep -qF "repository.visibility == 'public' && 'production'" .github/workflows/deploy.yml
-      - name: Check that the shared workflows come from a Deploy-your-Startup/deploy release
-        working-directory: ../generated
-        run: |
-          test "$(grep -c 'uses: Deploy-your-Startup/deploy/.github/workflows/[a-z0-9-]*\.yml@64ec3a5f13de5328f02272cccaa3bcffde768fcf$' .github/workflows/deploy.yml)" = 2
-          ! grep -q 'deploy-your-startup/' .github/workflows/deploy.yml
+      - name: Check the one shared deployment version in the rendered project
+        run: python3 tests/deployment_version_check.py ../generated
       - name: Reject unresolved placeholders
         run: "! grep -rn '§§' ../generated"
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
