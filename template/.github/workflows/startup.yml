@@ -1,12 +1,12 @@
 name: Shared deployment version
-'on':
+"on":
   workflow_call:
     inputs:
       project_name:
         description: Cloudflare Pages project name
         required: false
         type: string
-        default: ''
+        default: ""
       working_directory:
         description: Path to the site source (where package.json lives)
         required: false
@@ -15,7 +15,7 @@ name: Shared deployment version
       node_version:
         description: Node.js version
         required: false
-        default: '22'
+        default: "22"
         type: string
       build_output:
         description: Build output directory, relative to working_directory
@@ -30,7 +30,7 @@ name: Shared deployment version
       environment:
         description: GitHub environment whose secrets and branch rules guard the deploy; empty uses repository secrets
         required: false
-        default: ''
+        default: ""
         type: string
       run_e2e:
         description: Run browser tests in CI; Dependabot PRs always run them
@@ -45,7 +45,7 @@ name: Shared deployment version
       runtime_revision:
         description: Shared CI runtime resolved by the application workflow
         type: string
-        default: ''
+        default: ""
       artifact_prefix:
         type: string
         default: e2e
