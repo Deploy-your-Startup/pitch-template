@@ -7,7 +7,7 @@ execute shell commands.
 
 The template asks for public parameters only: `project_name`, `base_domain`,
 `github_username`, and the shared deployment `deploy_repository` and
-`deploy_ref`, which default to the `v1.0.0` release of `Deploy-your-Startup/deploy`. Cloudflare credentials are stored by
+`deploy_ref`, which default to the `v2.1.0` release of `Deploy-your-Startup/deploy`. Cloudflare credentials are stored by
 startup CLI as repository secrets of a private generated project, or as secrets
 of a `production` environment that only `main` can deploy to once it is public.
 They never appear in Copier answers.
